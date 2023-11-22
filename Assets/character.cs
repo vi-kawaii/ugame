@@ -11,8 +11,13 @@ public class character : MonoBehaviour
     private float playerSpeed = 1.0f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
+    private Vector3 moveDirection;
+    private float runSpeed;
+    private bool isRun = false;
+    private float t = 1;
 
-    void Start() {
+    void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -24,17 +29,40 @@ public class character : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector3 moveX = camera.transform.right * Input.GetAxis("Horizontal");
-        Vector3 moveZ = Quaternion.AngleAxis(-90, Vector3.up) * camera.transform.right * Input.GetAxis("Vertical");
-        
-        var moveDirection = moveX + moveZ;
+        if (groundedPlayer)
+        {
+            Vector3 moveX = camera.transform.right * Input.GetAxis("Horizontal");
+            Vector3 moveZ = Quaternion.AngleAxis(-90, Vector3.up) * camera.transform.right * Input.GetAxis("Vertical");
+            
+            moveDirection = moveX + moveZ;
 
-        controller.Move(moveDirection * Time.deltaTime * playerSpeed * (Input.GetKey("left shift") ? 4 : 1));
+            if (isRun != Input.GetKey("left shift"))
+            {
+                isRun = Input.GetKey("left shift");
+                t = 0;
+            }
+
+            Debug.Log(runSpeed);
+            Debug.Log(t);
+
+            runSpeed = Input.GetKey("left shift") ? Mathf.Lerp(2, 4, t) : Mathf.Lerp(4, 2, t);
+
+            if (t < 1)
+            {
+                t += 32 * Time.deltaTime;
+            }
+            else
+            {
+                t = 1;
+            }
+        }
+
+        controller.Move(moveDirection * Time.deltaTime * playerSpeed * runSpeed);
 
         // Changes the height position of the player..
         if (Input.GetAxisRaw("Jump") == 1 && groundedPlayer)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.5f * gravityValue);
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
