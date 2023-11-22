@@ -10,7 +10,7 @@ public class character : MonoBehaviour
     private bool groundedPlayer;
     private float playerSpeed = 1.0f;
     private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f;
+    private float gravityValue = -9.81f * 2;
     private Vector3 moveDirection;
     private float runSpeed;
     private bool isRun = false;
@@ -41,9 +41,6 @@ public class character : MonoBehaviour
                 isRun = Input.GetKey("left shift");
                 t = 0;
             }
-
-            Debug.Log(runSpeed);
-            Debug.Log(t);
 
             runSpeed = Input.GetKey("left shift") ? Mathf.Lerp(2, 4, t) : Mathf.Lerp(4, 2, t);
 
