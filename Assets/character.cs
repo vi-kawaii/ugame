@@ -8,7 +8,7 @@ public class character : MonoBehaviour
     public Camera camera;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
+    private float playerSpeed = 1.0f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
 
@@ -29,12 +29,12 @@ public class character : MonoBehaviour
         
         var moveDirection = moveX + moveZ;
 
-        controller.Move(moveDirection * Time.deltaTime * playerSpeed);
+        controller.Move(moveDirection * Time.deltaTime * playerSpeed * (Input.GetKey("left shift") ? 4 : 1));
 
         // Changes the height position of the player..
         if (Input.GetAxisRaw("Jump") == 1 && groundedPlayer)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.5f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
