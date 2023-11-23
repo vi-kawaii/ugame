@@ -10,7 +10,7 @@ public class character : MonoBehaviour
     private bool groundedPlayer;
     private float playerSpeed = 1.0f;
     private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f * 2;
+    private float gravityValue = -9.81f * 1.5f;
     private Vector3 moveDirection;
     private float runSpeed;
     private bool isRun = false;

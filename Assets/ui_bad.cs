@@ -23,14 +23,11 @@ public class ui_bad : MonoBehaviour
         if (pointInsideScreen.z < 0)
         {
             pointInsideScreen = new Vector3(
-                pointInsideScreen.x < 0 ? Screen.width / 2 : 0 - Screen.width / 2,
-                pointInsideScreen.y < 0 ? 0 - Screen.height / 2 : Screen.height / 2,
-                // Mathf.Clamp(pointInsideScreen.y - Screen.height, 0 - Screen.height / 2, Screen.height / 2),
+                -pointInsideScreen.x,
+                pointInsideScreen.y < 0 ? Screen.height / 2 : 0 - Screen.height / 2,
                 pointInsideScreen.z
             );
         }
-
-        Debug.Log(pointInsideScreen);
 
         rt.anchoredPosition = pointInsideScreen;
     }
