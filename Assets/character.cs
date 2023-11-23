@@ -5,7 +5,7 @@ using UnityEngine;
 public class character : MonoBehaviour
 {
     public CharacterController controller;
-    public Camera camera;
+    public Camera cam;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private float playerSpeed = 1.0f;
@@ -15,11 +15,6 @@ public class character : MonoBehaviour
     private float runSpeed;
     private bool isRun = false;
     private float t = 1;
-
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 
     void Update()
     {
@@ -31,8 +26,8 @@ public class character : MonoBehaviour
 
         if (groundedPlayer)
         {
-            Vector3 moveX = camera.transform.right * Input.GetAxis("Horizontal");
-            Vector3 moveZ = Quaternion.AngleAxis(-90, Vector3.up) * camera.transform.right * Input.GetAxis("Vertical");
+            Vector3 moveX = cam.transform.right * Input.GetAxis("Horizontal");
+            Vector3 moveZ = Quaternion.AngleAxis(-90, Vector3.up) * cam.transform.right * Input.GetAxis("Vertical");
             
             moveDirection = moveX + moveZ;
 
