@@ -15,6 +15,8 @@ public class character : MonoBehaviour
     private float runSpeed;
     private bool isRun = false;
     private float t = 1;
+    private bool flyMode = false;
+    private bool jumpKeyWasReleased = false;
 
     void Update()
     {
@@ -24,7 +26,7 @@ public class character : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        if (groundedPlayer)
+        if (groundedPlayer || flyMode)
         {
             Vector3 moveX = cam.transform.right * Input.GetAxis("Horizontal");
             Vector3 moveZ = Quaternion.AngleAxis(-90, Vector3.up) * cam.transform.right * Input.GetAxis("Vertical");
@@ -55,6 +57,32 @@ public class character : MonoBehaviour
         if (Input.GetAxisRaw("Jump") == 1 && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
+        }
+
+        if (Input.GetKeyUp("space"))
+        {
+            jumpKeyWasReleased = true;
+        }
+
+        if (Input.GetKeyDown("space") && jumpKeyWasReleased && !groundedPlayer)
+        {
+            flyMode = true;
+        }
+
+        if (groundedPlayer)
+        {
+            flyMode = false;
+            jumpKeyWasReleased = false;
+        }
+
+        if (flyMode && Input.GetKey("space"))
+        {
+            playerVelocity.y += jumpHeight * -.01f * gravityValue;
+        }
+
+        if (flyMode && Input.GetKeyUp("space"))
+        {
+            playerVelocity.y += gravityValue;
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
