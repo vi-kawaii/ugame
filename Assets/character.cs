@@ -70,12 +70,7 @@ public class character : MonoBehaviour
 
         if (flyMode && Input.GetKey("space"))
         {
-            playerVelocity.y += jumpHeight * -.01f * gravityValue;
-        }
-
-        if (flyMode && Input.GetKeyUp("space"))
-        {
-            playerVelocity.y += gravityValue;
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
