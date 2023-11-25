@@ -16,7 +16,6 @@ public class character : MonoBehaviour
     private bool isRun = false;
     private float t = 1;
     private bool flyMode = false;
-    private bool jumpKeyWasReleased = false;
 
     void Update()
     {
@@ -59,12 +58,7 @@ public class character : MonoBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
         }
 
-        if (Input.GetKeyUp("space"))
-        {
-            jumpKeyWasReleased = true;
-        }
-
-        if (Input.GetKeyDown("space") && jumpKeyWasReleased && !groundedPlayer)
+        if (Input.GetKeyDown("space") && !groundedPlayer)
         {
             flyMode = true;
         }
@@ -72,7 +66,6 @@ public class character : MonoBehaviour
         if (groundedPlayer)
         {
             flyMode = false;
-            jumpKeyWasReleased = false;
         }
 
         if (flyMode && Input.GetKey("space"))
