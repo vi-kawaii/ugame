@@ -24,6 +24,16 @@ public class phone_ui : MonoBehaviour
         Debug.Log("chat app");
     }
 
+    public void OnExitClick()
+    {
+        Debug.Log("exit");
+    }
+
+    public void OnPauseClick()
+    {
+        Debug.Log("pause");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
