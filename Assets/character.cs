@@ -74,16 +74,14 @@ public class character : MonoBehaviour
         {
             if (t2 < 1)
             {
-                t2 += 32 * Time.deltaTime;
-                playerVelocity.y = Mathf.Lerp(cachedVelocity_y, 0, t2);
+                t2 += 3 * Time.deltaTime;
             }
             else
             {
                 t2 = 1;
-                playerVelocity.y = Mathf.Lerp(0, Mathf.Sqrt(jumpHeight * -1.0f * gravityValue), t2);
             }
 
-            // playerVelocity.y = Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
+            playerVelocity.y = Mathf.Lerp(cachedVelocity_y, Mathf.Sqrt(jumpHeight * -1.0f * gravityValue), t2);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -93,8 +91,6 @@ public class character : MonoBehaviour
             t2 = 0;
             cachedVelocity_y = playerVelocity.y;
         }
-
-        Debug.Log(playerVelocity.y);
 
         controller.Move(playerVelocity * Time.deltaTime);
     }
