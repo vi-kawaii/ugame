@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class phone_ui : MonoBehaviour
 {
+    public GameObject chatApp;
+
     public void OnCameraAppClick()
     {
         Debug.Log("camera app");
@@ -21,7 +23,7 @@ public class phone_ui : MonoBehaviour
 
     public void OnChatAppClick()
     {
-        Debug.Log("chat app");
+        chatApp.SetActive(true);
     }
 
     public void OnExitClick()
@@ -37,7 +39,7 @@ public class phone_ui : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        chatApp.SetActive(false);
     }
 
     // Update is called once per frame
