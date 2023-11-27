@@ -5,6 +5,9 @@ using UnityEngine;
 public class phone_ui : MonoBehaviour
 {
     public GameObject chatApp;
+    public GameObject tasksApp;
+    public GameObject mapApp;
+    public GameObject close;
 
     public void OnCameraAppClick()
     {
@@ -13,17 +16,20 @@ public class phone_ui : MonoBehaviour
 
     public void OnTasksAppClick()
     {
-        Debug.Log("tasks app");
+        tasksApp.SetActive(true);
+        close.SetActive(true);
     }
 
     public void OnMapAppClick()
     {
-        Debug.Log("map app");
+        mapApp.SetActive(true);
+        close.SetActive(true);
     }
 
     public void OnChatAppClick()
     {
         chatApp.SetActive(true);
+        close.SetActive(true);
     }
 
     public void OnExitClick()
@@ -36,10 +42,21 @@ public class phone_ui : MonoBehaviour
         Debug.Log("pause");
     }
 
+    public void OnCloseClick()
+    {
+        close.SetActive(false);
+        chatApp.SetActive(false);
+        mapApp.SetActive(false);
+        tasksApp.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         chatApp.SetActive(false);
+        tasksApp.SetActive(false);
+        mapApp.SetActive(false);
+        close.SetActive(false);
     }
 
     // Update is called once per frame
