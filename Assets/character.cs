@@ -81,6 +81,11 @@ public class character : MonoBehaviour
                 t2 = 1;
             }
 
+            if (cachedVelocity_y == 0)
+            {
+                cachedVelocity_y = playerVelocity.y;
+            }
+
             playerVelocity.y = Mathf.Lerp(cachedVelocity_y, Mathf.Sqrt(jumpHeight * -1.0f * gravityValue), t2);
         }
 
@@ -89,7 +94,7 @@ public class character : MonoBehaviour
         if (flyMode && !Input.GetKey("space"))
         {
             t2 = 0;
-            cachedVelocity_y = playerVelocity.y;
+            cachedVelocity_y = 0;
         }
 
         controller.Move(playerVelocity * Time.deltaTime);
