@@ -44,12 +44,17 @@ public class character : MonoBehaviour
 
             if (t < 1)
             {
-                t += 32 * Time.deltaTime;
+                t += 8 * Time.deltaTime;
             }
             else
             {
                 t = 1;
             }
+        }
+
+        if (flyMode && Input.GetKey("left shift"))
+        {
+            runSpeed *= 1.5f;
         }
 
         controller.Move(moveDirection * Time.deltaTime * playerSpeed * runSpeed);
@@ -95,6 +100,11 @@ public class character : MonoBehaviour
         {
             t2 = 0;
             cachedVelocity_y = 0;
+        }
+
+        if (flyMode && Input.GetKey("left shift"))
+        {
+            playerVelocity.y = 0;
         }
 
         controller.Move(playerVelocity * Time.deltaTime);
