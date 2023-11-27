@@ -15,7 +15,9 @@ public class character : MonoBehaviour
     private float runSpeed;
     private bool isRun = false;
     private float t = 1;
+    private float t2 = 1;
     private bool flyMode = false;
+    private float cachedVelocity_y = 0;
 
     void Update()
     {
@@ -70,10 +72,30 @@ public class character : MonoBehaviour
 
         if (flyMode && Input.GetKey("space"))
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
+            if (t2 < 1)
+            {
+                t2 += 32 * Time.deltaTime;
+                playerVelocity.y = Mathf.Lerp(cachedVelocity_y, 0, t2);
+            }
+            else
+            {
+                t2 = 1;
+                playerVelocity.y = Mathf.Lerp(0, Mathf.Sqrt(jumpHeight * -1.0f * gravityValue), t2);
+            }
+
+            // playerVelocity.y = Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
+
+        if (flyMode && !Input.GetKey("space"))
+        {
+            t2 = 0;
+            cachedVelocity_y = playerVelocity.y;
+        }
+
+        Debug.Log(playerVelocity.y);
+
         controller.Move(playerVelocity * Time.deltaTime);
     }
 }
