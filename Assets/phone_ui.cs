@@ -10,8 +10,6 @@ public class phone_ui : MonoBehaviour
     public GameObject mapApp;
     public GameObject close;
 
-    private string currentChat = "";
-
     public void OnCameraAppClick()
     {
         Debug.Log("camera app");
@@ -35,11 +33,9 @@ public class phone_ui : MonoBehaviour
         close.SetActive(true);
     }
 
-    public void OnOpenChatClick(string chatId)
+    public void OnOpenChatClick()
     {
         chat.SetActive(true);
-        currentChat = chatId;
-        Debug.Log($"{currentChat} chat opened");
     }
 
     public void OnExitClick()
@@ -54,9 +50,8 @@ public class phone_ui : MonoBehaviour
 
     public void OnCloseClick()
     {
-        if (currentChat != "")
+        if (chat.activeSelf)
         {
-            currentChat = "";
             chat.SetActive(false);
             return;
         }
