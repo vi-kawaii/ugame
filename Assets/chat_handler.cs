@@ -5,12 +5,13 @@ using UnityEngine.EventSystems;
 
 public class chat_handler : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject phone;
+    public GameObject Phone;
+    public string Person;
     private phone_ui script;
 
     void Start()
     {
-        script = phone.GetComponent<phone_ui>();
+        script = Phone.GetComponent<phone_ui>();
     }
 
     public void OnPointerClick(PointerEventData e)

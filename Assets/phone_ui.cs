@@ -1,14 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
+class ChatMessage
+{
+    public string Person;
+    public string Message;
+}
 
 public class phone_ui : MonoBehaviour
 {
     public GameObject chatApp;
     public GameObject chat;
+    public GameObject chatContent;
+    public GameObject personPrefab;
     public GameObject tasksApp;
     public GameObject mapApp;
     public GameObject close;
+
+    private List<ChatMessage> chatMessages;
 
     public void OnCameraAppClick()
     {
@@ -70,6 +81,22 @@ public class phone_ui : MonoBehaviour
         tasksApp.SetActive(false);
         mapApp.SetActive(false);
         close.SetActive(false);
+
+        chatMessages = new List<ChatMessage>
+        {
+            new ChatMessage{ Person="first", Message="Hello world from first" },
+            new ChatMessage{ Person="second", Message="Hello world from second" },
+            new ChatMessage{ Person="trird", Message="Hello world from third" },
+            new ChatMessage{ Person="fourth", Message="Hello world from fourth" },
+        };
+
+        chatMessages.ForEach(m =>
+        {
+            var x = Instantiate(personPrefab, chatContent.transform);
+            var s = x.GetComponent<chat_handler>();
+            s.Phone = gameObject;
+            s.Person = m.Person;
+        });
     }
 
     // Update is called once per frame
