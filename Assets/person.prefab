@@ -434,4 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be680902964a034288190b5d02ca1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 0}
+  Phone: {fileID: 0}
+  Person: 
+  Message: 
+  Name: {fileID: 7688065295149486339}
+  Msg: {fileID: 4397801468693397940}

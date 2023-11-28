@@ -96,6 +96,7 @@ public class phone_ui : MonoBehaviour
             var s = x.GetComponent<chat_handler>();
             s.Phone = gameObject;
             s.Person = m.Person;
+            s.Message = m.Message;
         });
     }
 
