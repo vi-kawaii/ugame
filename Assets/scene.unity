@@ -4037,6 +4037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3295f75bebc22094f93804e9e600f6f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phoneUi: {fileID: 984487501}
   chatApp: {fileID: 1033613850}
   chat: {fileID: 1808001411}
   chatContent: {fileID: 581909143}

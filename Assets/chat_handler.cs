@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class chat_handler : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject Phone;
-    public string Person;
-    public string Message;
-    public GameObject Name;
-    public GameObject Msg;
     private phone_ui script;
+    private TextMeshProUGUI personName;
+    private TextMeshProUGUI personMessage;
 
-    void Start()
+    void Awake()
     {
-        script = Phone.GetComponent<phone_ui>();
-        Name.GetComponent<Text>().text = Person;
-        Msg.GetComponent<Text>().text = Message;
+        personName = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        personMessage = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+    }
+
+    public void SetParams(GameObject phone, string person, string message)
+    {
+        script = phone.GetComponent<phone_ui>();
+        personName.text = person;
+        personMessage.text = message;
     }
 
     public void OnPointerClick(PointerEventData e)

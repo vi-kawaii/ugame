@@ -11,6 +11,7 @@ class ChatMessage
 
 public class phone_ui : MonoBehaviour
 {
+    public GameObject phoneUi;
     public GameObject chatApp;
     public GameObject chat;
     public GameObject chatContent;
@@ -42,6 +43,13 @@ public class phone_ui : MonoBehaviour
     {
         chatApp.SetActive(true);
         close.SetActive(true);
+
+        chatMessages.ForEach(m =>
+        {
+            var x = Instantiate(personPrefab, chatContent.transform);
+            var s = x.GetComponent<chat_handler>();
+            s.SetParams(phoneUi, m.Person, m.Message);
+        });
     }
 
     public void OnOpenChatClick()
@@ -89,15 +97,6 @@ public class phone_ui : MonoBehaviour
             new ChatMessage{ Person="trird", Message="Hello world from third" },
             new ChatMessage{ Person="fourth", Message="Hello world from fourth" },
         };
-
-        chatMessages.ForEach(m =>
-        {
-            var x = Instantiate(personPrefab, chatContent.transform);
-            var s = x.GetComponent<chat_handler>();
-            s.Phone = gameObject;
-            s.Person = m.Person;
-            s.Message = m.Message;
-        });
     }
 
     // Update is called once per frame
