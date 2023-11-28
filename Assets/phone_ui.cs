@@ -5,9 +5,12 @@ using UnityEngine;
 public class phone_ui : MonoBehaviour
 {
     public GameObject chatApp;
+    public GameObject chat;
     public GameObject tasksApp;
     public GameObject mapApp;
     public GameObject close;
+
+    private string currentChat = "";
 
     public void OnCameraAppClick()
     {
@@ -32,6 +35,13 @@ public class phone_ui : MonoBehaviour
         close.SetActive(true);
     }
 
+    public void OnOpenChatClick(string chatId)
+    {
+        chat.SetActive(true);
+        currentChat = chatId;
+        Debug.Log($"{currentChat} chat opened");
+    }
+
     public void OnExitClick()
     {
         Debug.Log("exit");
@@ -44,6 +54,13 @@ public class phone_ui : MonoBehaviour
 
     public void OnCloseClick()
     {
+        if (currentChat != "")
+        {
+            currentChat = "";
+            chat.SetActive(false);
+            return;
+        }
+
         close.SetActive(false);
         chatApp.SetActive(false);
         mapApp.SetActive(false);
@@ -54,6 +71,7 @@ public class phone_ui : MonoBehaviour
     void Start()
     {
         chatApp.SetActive(false);
+        chat.SetActive(false);
         tasksApp.SetActive(false);
         mapApp.SetActive(false);
         close.SetActive(false);
