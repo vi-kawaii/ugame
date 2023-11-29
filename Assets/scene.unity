@@ -3619,6 +3619,7 @@ MonoBehaviour:
   chat: {fileID: 1808001411}
   chatContent: {fileID: 581909143}
   chatForPersonContent: {fileID: 140454106}
+  chatForPersonTitle: {fileID: 1229852806}
   personPrefab: {fileID: 8253060195905583588, guid: cdce4530521188840a5a900f134e0a63, type: 3}
   messagePrefab: {fileID: 5742224500447407776, guid: 7269bc5488f501d44ab1dde31740127b, type: 3}
   tasksApp: {fileID: 894870037}

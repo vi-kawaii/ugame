@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 class ChatMessage
 {
@@ -16,6 +17,7 @@ public class phone_ui : MonoBehaviour
     public GameObject chat;
     public GameObject chatContent;
     public GameObject chatForPersonContent;
+    public GameObject chatForPersonTitle;
     public GameObject personPrefab;
     public GameObject messagePrefab;
     public GameObject tasksApp;
@@ -57,6 +59,8 @@ public class phone_ui : MonoBehaviour
     public void OnOpenChatClick(string person)
     {
         chat.SetActive(true);
+
+        chatForPersonTitle.GetComponent<TextMeshProUGUI>().text = person;
 
         chatMessages.Where(m => m.Person == person).ToList().ForEach(m =>
         {
