@@ -4,7 +4,8 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 
-class ChatMessage
+[System.Serializable]
+public class ChatMessage
 {
     public string Person;
     public string Message;
@@ -24,7 +25,7 @@ public class phone_ui : MonoBehaviour
     public GameObject mapApp;
     public GameObject close;
 
-    private List<ChatMessage> chatMessages;
+    public List<ChatMessage> chatMessages;
 
     public void OnCameraAppClick()
     {
@@ -48,8 +49,17 @@ public class phone_ui : MonoBehaviour
         chatApp.SetActive(true);
         close.SetActive(true);
 
+        string currentPerson = "";
+
         chatMessages.ForEach(m =>
         {
+            if (m.Person == currentPerson)
+            {
+                return;
+            }
+
+            currentPerson = m.Person;
+
             var x = Instantiate(personPrefab, chatContent.transform);
             var s = x.GetComponent<chat_handler>();
             s.SetParams(phoneUi, m.Person, m.Message);
@@ -107,14 +117,6 @@ public class phone_ui : MonoBehaviour
         tasksApp.SetActive(false);
         mapApp.SetActive(false);
         close.SetActive(false);
-
-        chatMessages = new List<ChatMessage>
-        {
-            new ChatMessage{ Person="first", Message="Hello world from first" },
-            new ChatMessage{ Person="second", Message="Hello world from second" },
-            new ChatMessage{ Person="trird", Message="Hello world from third" },
-            new ChatMessage{ Person="fourth", Message="Hello world from fourth" },
-        };
     }
 
     // Update is called once per frame

@@ -3625,6 +3625,17 @@ MonoBehaviour:
   tasksApp: {fileID: 894870037}
   mapApp: {fileID: 704027200}
   close: {fileID: 690388535}
+  chatMessages:
+  - Person: first
+    Message: Hello world from first
+  - Person: first
+    Message: One another message
+  - Person: second
+    Message: Hello world from second
+  - Person: third
+    Message: Hello world from third
+  - Person: fourth
+    Message: Hello world from fourth
 --- !u!1 &998046266
 GameObject:
   m_ObjectHideFlags: 0
