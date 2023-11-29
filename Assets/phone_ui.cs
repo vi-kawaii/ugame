@@ -15,7 +15,9 @@ public class phone_ui : MonoBehaviour
     public GameObject chatApp;
     public GameObject chat;
     public GameObject chatContent;
+    public GameObject chatForPersonContent;
     public GameObject personPrefab;
+    public GameObject messagePrefab;
     public GameObject tasksApp;
     public GameObject mapApp;
     public GameObject close;
@@ -52,9 +54,16 @@ public class phone_ui : MonoBehaviour
         });
     }
 
-    public void OnOpenChatClick()
+    public void OnOpenChatClick(string person)
     {
         chat.SetActive(true);
+
+        chatMessages.Where(m => m.Person == person).ToList().ForEach(m =>
+        {
+            var x = Instantiate(messagePrefab, chatForPersonContent.transform);
+            var s = x.GetComponent<chat_for_person_handler>();
+            s.SetParams(m.Message);
+        });
     }
 
     public void OnExitClick()
@@ -71,6 +80,11 @@ public class phone_ui : MonoBehaviour
     {
         if (chat.activeSelf)
         {
+            foreach (Transform c in chatForPersonContent.transform)
+            {
+                Destroy(c.gameObject);
+            }
+
             chat.SetActive(false);
             return;
         }

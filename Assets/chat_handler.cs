@@ -26,6 +26,6 @@ public class chat_handler : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData e)
     {
-        script.OnOpenChatClick();
+        script.OnOpenChatClick(personName.text);
     }
 }
