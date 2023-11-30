@@ -114,7 +114,7 @@ public class character : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, cam.transform.forward, out hit, Mathf.Infinity))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity))
             {
                 Debug.Log(hit.collider.gameObject.name);
             }
