@@ -109,12 +109,12 @@ public class character : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
 
+        Debug.DrawRay(transform.position, new Vector3(0, 0, 0));
+
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("fire");
-
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, cam.transform.forward, out hit, Mathf.Infinity))
             {
                 Debug.Log(hit.collider.gameObject.name);
             }
