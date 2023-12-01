@@ -9,6 +9,13 @@ public class npc_ui : MonoBehaviour
     public void TakeDamage()
     {
         Transform content = transform.GetChild(0).transform;
+
+        if (content.childCount == 1)
+        {
+            Destroy(transform.parent.gameObject);
+            return;
+        }
+
         Destroy(content.GetChild(0).gameObject);
     }
 
