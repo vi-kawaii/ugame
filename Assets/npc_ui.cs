@@ -8,9 +8,8 @@ public class npc_ui : MonoBehaviour
 
     public void TakeDamage()
     {
-        int childCountInContent = transform.GetChild(0).transform.childCount;
         Transform content = transform.GetChild(0).transform;
-        Destroy(content.GetChild(childCountInContent - 1).gameObject);
+        Destroy(content.GetChild(0).gameObject);
     }
 
     // Update is called once per frame
