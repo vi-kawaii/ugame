@@ -116,7 +116,10 @@ public class character : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity))
             {
-                Debug.Log(hit.collider.gameObject.name);
+                if (hit.collider.gameObject.tag == "Enemy")
+                {
+                    hit.collider.gameObject.transform.GetChild(0).transform.GetComponent<npc_ui>().TakeDamage();
+                }
             }
         }
     }
