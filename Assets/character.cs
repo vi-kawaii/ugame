@@ -109,8 +109,6 @@ public class character : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
 
-        Debug.DrawRay(transform.position, new Vector3(0, 0, 0));
-
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
