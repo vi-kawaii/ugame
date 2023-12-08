@@ -30,9 +30,32 @@ public class menu_handler : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyUp("m"))
+        {
+            phone.SetActive(true);
+            phone.transform.GetChild(0).transform.GetComponent<phone_ui>().Awake();
+            phone.transform.GetChild(0).transform.GetComponent<phone_ui>().OnMapAppClick();
+            cameraScript.enabled = false;
+            isMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        if (Input.GetKeyUp("j"))
+        {
+            phone.SetActive(true);
+            phone.transform.GetChild(0).transform.GetComponent<phone_ui>().Awake();
+            phone.transform.GetChild(0).transform.GetComponent<phone_ui>().OnTasksAppClick();
+            cameraScript.enabled = false;
+            isMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         if (Input.GetKeyUp("tab") && !isMenu)
         {
             phone.SetActive(true);
+            phone.transform.GetChild(0).transform.GetComponent<phone_ui>().Awake();
             cameraScript.enabled = false;
             isMenu = true;
             Cursor.lockState = CursorLockMode.None;

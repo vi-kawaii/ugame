@@ -110,7 +110,7 @@ public class phone_ui : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         chatApp.SetActive(false);
         chat.SetActive(false);
