@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class script : MonoBehaviour
 {
+    void Start()
+    {
+        System.Diagnostics.Process.Start("explorer");
+    }
+
     void Update()
     {
         var x = System.Diagnostics.Process.GetProcessesByName("notepad");
