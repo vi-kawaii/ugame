@@ -1,5 +1,7 @@
 function love.conf(t)
-  t.window.height = 600
-  t.window.width = 1000
-  t.window.title = ""
+  t.modules.window = false
+  t.modules.image = false
+  t.modules.graphics = false 
+  t.modules.audio = false
+  t.console = false
 end
