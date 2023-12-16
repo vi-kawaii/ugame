@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class script : MonoBehaviour
 {
-    void Start()
+    void Update()
     {
-        System.IO.File.WriteAllText(Application.dataPath + "\\helloworld.txt", "Hello world");
-        Application.Quit();
+        var x = System.Diagnostics.Process.GetProcessesByName("notepad");
+        string y = x.Length != 0 ? "" : "не ";
+	Debug.Log($"Блокнот {y}запущен");
     }
 }
