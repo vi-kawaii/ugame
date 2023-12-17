@@ -1,18 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class script : MonoBehaviour
 {
+    string version;
+
     void Start()
     {
-        System.Diagnostics.Process.Start("explorer");
+        version = File.ReadAllText("version.txt");
     }
 
     void Update()
     {
-        var x = System.Diagnostics.Process.GetProcessesByName("notepad");
-        string y = x.Length != 0 ? "" : "не ";
-	Debug.Log($"Блокнот {y}запущен");
+        if (System.Diagnostics.Process.GetProcessesByName("game").Length > 0)
+        {
+            return;
+        }
+
+        System.Diagnostics.Process.Start(version + "\\game.exe");
+
+        var dirs = Directory.GetDirectories(".");
+        foreach (var dir in dirs)
+        {
+            if (dir == version)
+            {
+                continue;
+            }
+
+            Directory.Delete(dir, true);
+        }
+
+        Application.Quit();
     }
 }
