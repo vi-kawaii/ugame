@@ -46,6 +46,7 @@ public class character : MonoBehaviour
             {
                 exit.SetActive(false);
                 update.SetActive(true);
+                update.transform.parent.transform.GetComponent<phone_ui>().SetVersion(remoteVersion);
             }
         }
     }

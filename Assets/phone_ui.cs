@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
+using UnityEngine.Networking;
 
 [System.Serializable]
 public class ChatMessage
@@ -26,6 +27,8 @@ public class phone_ui : MonoBehaviour
     public GameObject close;
 
     public List<ChatMessage> chatMessages;
+
+    private string remoteVersion;
 
     public void OnCameraAppClick()
     {
@@ -88,6 +91,39 @@ public class phone_ui : MonoBehaviour
     public void OnUpdateClick()
     {
         Debug.Log("update");
+        StartCoroutine(DownloadZip());
+    }
+
+    IEnumerator ProgressBar(UnityWebRequestAsyncOperation operation)
+    {
+        while (!operation.isDone)
+        {
+            Debug.Log($"{operation.progress * 100}%");
+            yield return null;
+        }
+    }
+
+    IEnumerator DownloadZip()
+    {
+        var u = new UnityWebRequest($"https://vi-kawaii.github.io/ugame/{remoteVersion}.zip");
+        u.downloadHandler = new DownloadHandlerFile($".\\{remoteVersion}.zip");
+        var operation = u.SendWebRequest();
+
+        yield return StartCoroutine(ProgressBar(operation));
+
+        if (u.isNetworkError || u.isHttpError)
+        {
+            Debug.Log(u.error);
+        }
+        else
+        {
+            Debug.Log("zip downloaded");
+        }
+    }
+
+    public void SetVersion(string v)
+    {
+        remoteVersion = v;
     }
 
     public void OnPauseClick()
