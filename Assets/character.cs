@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using System.IO;
 
 public class character : MonoBehaviour
 {
@@ -18,6 +20,32 @@ public class character : MonoBehaviour
     private float t2 = 1;
     private bool flyMode = false;
     private float cachedVelocity_y = 0;
+
+    void Start()
+    {
+        StartCoroutine(GetVersion());
+    }
+
+    IEnumerator GetVersion()
+    {
+        UnityWebRequest u = UnityWebRequest.Get("https://vi-kawaii.github.io/ugame/version.txt");
+        yield return u.SendWebRequest();
+
+        if (u.isNetworkError || u.isHttpError)
+        {
+            Debug.Log(u.error);
+        }
+        else
+        {
+            string remoteVersion = u.downloadHandler.text;
+            string version = File.ReadAllText("version.txt");
+            if (version != remoteVersion)
+            {
+                File.WriteAllText("version.txt", remoteVersion);
+                // download and unpack zip in folder with version name
+            }
+        }
+    }
 
     void Update()
     {
