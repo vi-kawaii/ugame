@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 using UnityEngine.Networking;
+using Ionic.Zip;
 
 [System.Serializable]
 public class ChatMessage
@@ -118,6 +119,7 @@ public class phone_ui : MonoBehaviour
         else
         {
             Debug.Log("zip downloaded");
+            // https://github.com/DinoChiesa/DotNetZip/blob/master/Examples/c%23/ReadZip/ReadZip.cs
         }
     }
 
