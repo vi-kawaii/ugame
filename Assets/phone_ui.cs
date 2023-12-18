@@ -85,6 +85,11 @@ public class phone_ui : MonoBehaviour
         Debug.Log("exit");
     }
 
+    public void OnUpdateClick()
+    {
+        Debug.Log("update");
+    }
+
     public void OnPauseClick()
     {
         Debug.Log("pause");

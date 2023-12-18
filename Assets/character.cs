@@ -8,6 +8,9 @@ public class character : MonoBehaviour
 {
     public CharacterController controller;
     public Camera cam;
+    public GameObject exit;
+    public GameObject update;
+
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private float playerSpeed = 1.0f;
@@ -41,8 +44,8 @@ public class character : MonoBehaviour
             string version = File.ReadAllText("version.txt");
             if (version != remoteVersion)
             {
-                File.WriteAllText("version.txt", remoteVersion);
-                // download and unpack zip in folder with version name
+                exit.SetActive(false);
+                update.SetActive(true);
             }
         }
     }
