@@ -108,7 +108,7 @@ public class phone_ui : MonoBehaviour
     IEnumerator DownloadZip()
     {
         var u = new UnityWebRequest($"https://vi-kawaii.github.io/ugame/{remoteVersion}.zip");
-        u.downloadHandler = new DownloadHandlerFile($"..\\{remoteVersion}.zip");
+        u.downloadHandler = new DownloadHandlerFile($".\\{remoteVersion}.zip");
         var operation = u.SendWebRequest();
 
         yield return StartCoroutine(ProgressBar(operation));
@@ -119,11 +119,11 @@ public class phone_ui : MonoBehaviour
         }
         else
         {
-            using (ZipFile zip = ZipFile.Read($"..\\{remoteVersion}.zip"))
+            using (ZipFile zip = ZipFile.Read($".\\{remoteVersion}.zip"))
             {
                 zip.ExtractAll($"{remoteVersion}");
             }
-            File.WriteAllText("..\\version.txt", remoteVersion);
+            File.WriteAllText(".\\version.txt", remoteVersion);
         }
     }
 
