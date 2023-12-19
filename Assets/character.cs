@@ -41,7 +41,7 @@ public class character : MonoBehaviour
         else
         {
             string remoteVersion = u.downloadHandler.text;
-            string version = File.ReadAllText("version.txt");
+            string version = File.ReadAllText("..\\version.txt");
             if (version != remoteVersion)
             {
                 exit.SetActive(false);

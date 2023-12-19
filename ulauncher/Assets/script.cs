@@ -14,12 +14,12 @@ public class script : MonoBehaviour
 
     void Update()
     {
-        if (System.Diagnostics.Process.GetProcessesByName("game").Length > 0)
+        if (System.Diagnostics.Process.GetProcessesByName("ugame").Length > 0)
         {
             return;
         }
 
-        //System.Diagnostics.Process.Start(version + "\\game.exe");
+        System.Diagnostics.Process.Start(version + "\\ugame.exe");
 
         var dirs = Directory.GetDirectories(".", "????-??-??");
         foreach (var dir in dirs)
@@ -33,6 +33,6 @@ public class script : MonoBehaviour
 
         File.Delete($"{version}.zip");
 
-        //Application.Quit();
+        Application.Quit();
     }
 }
