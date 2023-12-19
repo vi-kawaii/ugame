@@ -19,19 +19,20 @@ public class script : MonoBehaviour
             return;
         }
 
-        System.Diagnostics.Process.Start(version + "\\game.exe");
+        //System.Diagnostics.Process.Start(version + "\\game.exe");
 
-        var dirs = Directory.GetDirectories(".");
+        var dirs = Directory.GetDirectories(".", "????-??-??");
         foreach (var dir in dirs)
         {
-            if (dir == version)
+            if (dir == ".\\" + version)
             {
                 continue;
             }
-
             Directory.Delete(dir, true);
         }
 
-        Application.Quit();
+        File.Delete($"{version}.zip");
+
+        //Application.Quit();
     }
 }
