@@ -9,7 +9,11 @@ public class script : MonoBehaviour
 
     void Start()
     {
-        version = PlayerPrefs.GetString("version", "-1");
+        version = PlayerPrefs.GetString("version", "0000-00-00");
+        if (version == "0000-00-00")
+        {
+            PlayerPrefs.SetString("version", "0000-00-00");
+        }
     }
 
     void Update()

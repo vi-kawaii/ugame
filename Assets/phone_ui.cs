@@ -98,19 +98,17 @@ public class phone_ui : MonoBehaviour
 
     IEnumerator ProgressBar(UnityWebRequestAsyncOperation operation)
     {
-        progressText.GetComponent<TextMeshProUGUI>().text = "Начинается прогресс скачивания";
         while (!operation.isDone)
         {
-            progressText.GetComponent<TextMeshProUGUI>().text = Mathf.Floor(operation.progress).ToString() + "%";
+            progressText.GetComponent<TextMeshProUGUI>().text = operation.progress.ToString() + "%";
             yield return null;
         }
     }
 
     IEnumerator DownloadZip()
     {
-        progressText.GetComponent<TextMeshProUGUI>().text = "Начинается скачивание";
         var u = new UnityWebRequest($"https://vi-kawaii.github.io/ugame/{remoteVersion}.zip");
-        u.downloadHandler = new DownloadHandlerFile($"{remoteVersion}.zip");
+        u.downloadHandler = new DownloadHandlerFile($".\\{remoteVersion}.zip");
         var operation = u.SendWebRequest();
 
         yield return StartCoroutine(ProgressBar(operation));
@@ -121,9 +119,11 @@ public class phone_ui : MonoBehaviour
         }
         else
         {
-            using (ZipFile zip = ZipFile.Read($"{remoteVersion}.zip"))
+            progressText.GetComponent<TextMeshProUGUI>().text = "Распаковка архива начата";
+            using (ZipFile zip = ZipFile.Read($".\\{remoteVersion}.zip"))
             {
-                zip.ExtractAll($"{remoteVersion}");
+                progressText.GetComponent<TextMeshProUGUI>().text = "Мы внутри распаковки";
+                zip.ExtractAll($".\\{remoteVersion}");
             }
             progressText.GetComponent<TextMeshProUGUI>().text = "Архив распакован";
             PlayerPrefs.SetString("version", remoteVersion);
