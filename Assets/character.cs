@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.IO;
 
 public class character : MonoBehaviour
 {
@@ -41,7 +40,7 @@ public class character : MonoBehaviour
         else
         {
             string remoteVersion = u.downloadHandler.text;
-            string version = File.ReadAllText(".\\version.txt");
+            string version = PlayerPrefs.GetString("version");
             if (version != remoteVersion)
             {
                 exit.SetActive(false);

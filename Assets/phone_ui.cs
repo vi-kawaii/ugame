@@ -5,7 +5,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine.Networking;
 using Ionic.Zip;
-using System.IO;
 
 [System.Serializable]
 public class ChatMessage
@@ -27,6 +26,7 @@ public class phone_ui : MonoBehaviour
     public GameObject tasksApp;
     public GameObject mapApp;
     public GameObject close;
+    public GameObject progressText;
 
     public List<ChatMessage> chatMessages;
 
@@ -92,38 +92,41 @@ public class phone_ui : MonoBehaviour
 
     public void OnUpdateClick()
     {
-        Debug.Log("update");
+        progressText.SetActive(true);
         StartCoroutine(DownloadZip());
     }
 
     IEnumerator ProgressBar(UnityWebRequestAsyncOperation operation)
     {
+        progressText.GetComponent<TextMeshProUGUI>().text = "Начинается прогресс скачивания";
         while (!operation.isDone)
         {
-            Debug.Log($"{operation.progress * 100}%");
+            progressText.GetComponent<TextMeshProUGUI>().text = Mathf.Floor(operation.progress).ToString() + "%";
             yield return null;
         }
     }
 
     IEnumerator DownloadZip()
     {
+        progressText.GetComponent<TextMeshProUGUI>().text = "Начинается скачивание";
         var u = new UnityWebRequest($"https://vi-kawaii.github.io/ugame/{remoteVersion}.zip");
-        u.downloadHandler = new DownloadHandlerFile($".\\{remoteVersion}.zip");
+        u.downloadHandler = new DownloadHandlerFile($"{remoteVersion}.zip");
         var operation = u.SendWebRequest();
 
         yield return StartCoroutine(ProgressBar(operation));
 
         if (u.isNetworkError || u.isHttpError)
         {
-            Debug.Log(u.error);
+            progressText.GetComponent<TextMeshProUGUI>().text = u.error;
         }
         else
         {
-            using (ZipFile zip = ZipFile.Read($".\\{remoteVersion}.zip"))
+            using (ZipFile zip = ZipFile.Read($"{remoteVersion}.zip"))
             {
                 zip.ExtractAll($"{remoteVersion}");
             }
-            File.WriteAllText(".\\version.txt", remoteVersion);
+            progressText.GetComponent<TextMeshProUGUI>().text = "Архив распакован";
+            PlayerPrefs.SetString("version", remoteVersion);
         }
     }
 

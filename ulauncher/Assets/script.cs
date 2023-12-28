@@ -9,12 +9,12 @@ public class script : MonoBehaviour
 
     void Start()
     {
-        version = File.ReadAllText("version.txt");
+        version = PlayerPrefs.GetString("version", "-1");
     }
 
     void Update()
     {
-        if (System.Diagnostics.Process.GetProcessesByName("ugame").Length > 0)
+        if (System.Diagnostics.Process.GetProcessesByName("ugame").Length > 1)
         {
             return;
         }
