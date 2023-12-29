@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 using UnityEngine.Networking;
-using Ionic.Zip;
 
 [System.Serializable]
 public class ChatMessage
@@ -103,6 +102,7 @@ public class phone_ui : MonoBehaviour
             progressText.GetComponent<TextMeshProUGUI>().text = operation.progress.ToString() + "%";
             yield return null;
         }
+        yield return null;
     }
 
     IEnumerator DownloadZip()
@@ -116,20 +116,25 @@ public class phone_ui : MonoBehaviour
         if (u.isNetworkError || u.isHttpError)
         {
             progressText.GetComponent<TextMeshProUGUI>().text = u.error;
+            yield return null;
         }
         else
         {
+            yield return null;
             progressText.GetComponent<TextMeshProUGUI>().text = "Распаковка архива начата";
-// extract zip in another process in batchmode
-// set playerprefs extracted zip is false
-// check in while true with yield return null that playerprefs extracted zip
-            using (ZipFile zip = ZipFile.Read($".\\{remoteVersion}.zip"))
+            PlayerPrefs.SetString("remoteVersion", remoteVersion);
+            PlayerPrefs.SetString("extractingFinished", "false");
+
+            System.Diagnostics.Process uzip = new System.Diagnostics.Process();
+            uzip.StartInfo.FileName = ".\\uzip\\ugame.exe";
+            uzip.StartInfo.Arguments = "-batchmode";
+            uzip.Start();
+
+            while (PlayerPrefs.GetString("extractingFinished") == "false")
             {
                 yield return null;
-                progressText.GetComponent<TextMeshProUGUI>().text = "Мы внутри распаковки";
-                zip.ExtractAll($".\\{remoteVersion}");
-                yield return null;
             }
+            
             progressText.GetComponent<TextMeshProUGUI>().text = "Архив распакован";
             PlayerPrefs.SetString("version", remoteVersion);
         }
