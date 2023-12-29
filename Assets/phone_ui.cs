@@ -120,10 +120,15 @@ public class phone_ui : MonoBehaviour
         else
         {
             progressText.GetComponent<TextMeshProUGUI>().text = "Распаковка архива начата";
+// extract zip in another process in batchmode
+// set playerprefs extracted zip is false
+// check in while true with yield return null that playerprefs extracted zip
             using (ZipFile zip = ZipFile.Read($".\\{remoteVersion}.zip"))
             {
+                yield return null;
                 progressText.GetComponent<TextMeshProUGUI>().text = "Мы внутри распаковки";
                 zip.ExtractAll($".\\{remoteVersion}");
+                yield return null;
             }
             progressText.GetComponent<TextMeshProUGUI>().text = "Архив распакован";
             PlayerPrefs.SetString("version", remoteVersion);
