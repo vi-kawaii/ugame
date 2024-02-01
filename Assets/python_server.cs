@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
+using System.Diagnostics;
 
 public class python_server : MonoBehaviour
 {
@@ -28,6 +29,14 @@ public class python_server : MonoBehaviour
             yield return webRequest.SendWebRequest();
 
             textMeshPro.text = $"Response: {webRequest.downloadHandler.text}";
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        foreach (var process in Process.GetProcessesByName("app"))
+        {
+            process.Kill();
         }
     }
 }

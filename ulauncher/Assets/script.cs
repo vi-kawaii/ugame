@@ -37,6 +37,8 @@ public class script : MonoBehaviour
 
         File.Delete($"{version}.zip");
 
+        System.Diagnostics.Process.Start("app.exe");
+
         Application.Quit();
     }
 }
