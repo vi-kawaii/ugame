@@ -1,7 +1,7 @@
 from flask import Flask, request
 from textblob import TextBlob
-
-app = Flask(__name__)
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse, parse_qs
 
 def analyze_sentiment(text):
     # Create a TextBlob object
@@ -18,7 +18,28 @@ def analyze_sentiment(text):
     else:
         return "Neutral sentiment"
 
-@app.route('/')
-def hello():
-    msg = request.args.get('msg')
-    return analyze_sentiment(msg)
+class MyRequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        parsed_path = urlparse(self.path)
+        query_params = parse_qs(parsed_path.query)
+
+        # Set the response headers
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+
+        msg = query_params["msg"][0]
+
+        # Send the response
+        self.wfile.write(analyze_sentiment(msg).encode('utf-8'))
+
+if __name__ == '__main__':
+    # Set the port you want to use
+    port = 5000
+
+    # Create the server
+    server = HTTPServer(('localhost', port), MyRequestHandler)
+    print(f"Serving on port {port}")
+
+    # Start the server
+    server.serve_forever()
