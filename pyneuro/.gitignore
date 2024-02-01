@@ -1,0 +1,22 @@
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyInstaller build files
+/dist/
+/build/
+/*.spec
+/__pyinstaller/
+
+# Temporary files
+*.pyz
+*.pyzw
+*.pyz-*
+
+# Logs
+*.log
+
+# Virtual environment
+venv/
