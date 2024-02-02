@@ -40,7 +40,7 @@ public class timecycle : MonoBehaviour
 
     float TimeToDegrees(int time)
     {
-        float degreesPerMinute = 360f / (24 * 60);
+        float degreesPerMinute = 360f / (27 * 60);
         float rotationDegrees = minutes * degreesPerMinute;
 
         return rotationDegrees;
