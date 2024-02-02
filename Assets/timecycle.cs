@@ -9,7 +9,7 @@ public class timecycle : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("UpdateCurrentTime", 0f, 0.2f);
+        InvokeRepeating("UpdateCurrentTime", 0f, 0.02f);
     }
 
     void UpdateCurrentTime()
@@ -24,7 +24,7 @@ public class timecycle : MonoBehaviour
     void Update()
     {
         float rotationDegrees = TimeToDegrees(minutes);
-        Light.transform.rotation = Quaternion.Euler(rotationDegrees, 0f, 0f);
+        Light.transform.rotation = Quaternion.Euler(rotationDegrees + 90f + 180f, 0f, 0f);
         Text.text = ConvertToTime(minutes);
     }
 
@@ -40,12 +40,8 @@ public class timecycle : MonoBehaviour
 
     float TimeToDegrees(int time)
     {
-        int hours = minutes / 60;
-        int remainingMinutes = minutes % 60;
-
-        float totalMinutes = hours * 60 + minutes;
-        float degreesPerMinute = 360f / (12 * 60);
-        float rotationDegrees = totalMinutes * degreesPerMinute;
+        float degreesPerMinute = 360f / (24 * 60);
+        float rotationDegrees = minutes * degreesPerMinute;
 
         return rotationDegrees;
     }
